@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Console_Application.Models;
+using System;
 
 namespace Console_Application
 {
@@ -6,6 +7,8 @@ namespace Console_Application
     {
         static void Main(string[] args)
         {
+
+            
             
         }
     }
