@@ -41,21 +41,22 @@ namespace Console_Application.Services
             return "Group can't created";
         }
 
-        public string CreateStudent(int id ,string name,string surname,byte groupNumber, byte studentPoint)
+        public string CreateStudent(string name,string surname,string groupNumber,byte studentPoint)
         {
-            if (string.IsNullOrEmpty(name)||string.IsNullOrEmpty(surname)
-                ||groupNumber<=0||studentPoint<0)
-                
+            if (string.IsNullOrEmpty(name)||string.IsNullOrEmpty(surname))
+                //||groupNumber<=0||studentPoint<0)               
             {
                 Console.WriteLine("Please enter correct Information");
             }
-            Student student = new Student(id,name,surname,groupNumber,false,studentPoint);
+            Student student = new Student(name,surname,groupNumber,studentPoint);
 
             foreach (Student existedStudent in Students)
             {
                 if (student.Id!=existedStudent.Id)
-                {
-                    _students.Add(student);
+                {                   
+                    Students.Add(student);
+                    Group group = new Group();
+                    group.Students.Add(student);
                     return $"{student.FullName()} successfully added";
                 }
                 else
@@ -77,12 +78,10 @@ namespace Console_Application.Services
                 {
                     group.No = newNo.ToUpper().Trim();
                     Console.WriteLine($"{group.No} successfully edited");
-
                 }
                 else
                 {
                     Console.WriteLine($"There is no group to edit => {oldNo.ToUpper()}");
-
                 }
             }
             else
@@ -100,13 +99,31 @@ namespace Console_Application.Services
                 {
                     return group;
                 }
+                else
+                {
+                    Console.WriteLine("Can't find group");
+                }
             }
             return null;
         }
 
-        public void RemoveStudent()
+        public void RemoveStudent (string name, string surname, string groupNumber)
+
         {
-            throw new NotImplementedException();
+            Student student = new Student();
+            foreach (Student removeStudent in Students)
+            {
+                if (student.FullName()==removeStudent.FullName())
+                {
+                    _students.Remove(student);
+                    Console.WriteLine("Student removed from group");
+                }
+                else
+                {
+                    Console.WriteLine("Can't find student, please enter correct student name and surname");
+                }
+            }
+            
         }
 
         public void ShowAllGroups()
@@ -125,14 +142,41 @@ namespace Console_Application.Services
             
         }
 
-        public void ShowAllStudentOfGroup(Group group)
+        public void ShowAllStudentOfGroup(string no)
         {
+            Group group = FindGroup(no);
+            if (group !=null)
+            {
+                foreach (Student student in Students)
+                {
+                    Console.WriteLine(student);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Plese enter correct group number");
+            }
             
         }
 
         public void ShowAllStudentsOfAcademy()
         {
-            throw new NotImplementedException();
+            if (Students.Count>1||Groups.Count>1)
+            {
+                foreach (Group group in Groups)
+                {
+                    Console.WriteLine(group);
+                    foreach (Student student in Students)
+                    {
+                        Console.WriteLine(student);
+                    }
+                }
+            }
+            else
+            {
+                 Console.WriteLine("There are no students in course");
+            }
+            
         }
     }
 }
