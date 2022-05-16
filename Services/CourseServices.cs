@@ -27,14 +27,14 @@ namespace Console_Application.Services
 
             if (Groups.Count==0)
             {
-                _groups.Add(group);
+                Groups.Add(group);
 
             }
             foreach (Group existedGroup in Groups)
             {
                 if (group.No.ToLower().Trim()!=existedGroup.No.ToLower().Trim())
                 {
-                    _groups.Add(group);
+                    Groups.Add(group);
                     return $"{group.No} group successfully created";
                 }
             }
@@ -132,7 +132,7 @@ namespace Console_Application.Services
             {
                 if (student.FullName()==removeStudent.FullName())
                 {
-                    _students.Remove(student);
+                    Students.Remove(student);
                     Console.WriteLine("Student removed from group");
                 }
                 else
@@ -166,12 +166,12 @@ namespace Console_Application.Services
             {
                 foreach (Student student in Students)
                 {
-                    Console.WriteLine(student);
+                    Console.WriteLine(student.Name+student.Surname);
                 }
             }
             else
             {
-                Console.WriteLine("Plese enter correct group number");
+                Console.WriteLine("There are no students");
             }
             
         }

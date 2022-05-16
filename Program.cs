@@ -19,7 +19,7 @@ namespace Console_Application
                 Console.WriteLine("3.Edit Group");
                 Console.WriteLine("4.Remove Student");
                 Console.WriteLine("5.Show All Groups");
-                Console.WriteLine("6.FullName");
+                Console.WriteLine("6.Show All students of group");
                 bool result = int.TryParse(Console.ReadLine(), out selection);
                 Console.Clear();
                 switch (selection)
@@ -38,6 +38,9 @@ namespace Console_Application
                         break;
                     case 5:
                         MenuService.ShowAllGrupsMenu();
+                        break;
+                    case 6:
+                        MenuService.ShowAllStudentsOfGroupMenu();
                         break;
                     
                     default:

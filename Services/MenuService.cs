@@ -18,7 +18,11 @@ namespace Console_Application.Services
             Console.WriteLine("Please choose the category");
             foreach (var item in System.Enum.GetValues(typeof(Category)))
             {
+                
+                
                 Console.WriteLine($"{(int)item}.{item}");
+                
+                
             }
             bool resultCategory = System.Enum.TryParse(typeof(Category), Console.ReadLine(), out category);
 
@@ -85,7 +89,12 @@ namespace Console_Application.Services
         {
             courseServices.ShowAllGroups();
         }
-        
+
+        public static void ShowAllStudentsOfGroupMenu() 
+        {
+            Group group = new Group();
+            courseServices.ShowAllStudentOfGroup(group.No);
+        }
         
 
     }
