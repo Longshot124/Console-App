@@ -9,31 +9,37 @@ namespace Console_Application.Services
     static class MenuService
     {
         public static CourseServices courseServices = new CourseServices();
+        public static Student student = new Student();
         public static void CreateCourseMenu() 
         {
             Group group = new Group();
-
-            Console.WriteLine($"Please choose the selection");
-
             object category;
-            bool categoryResult = System.Enum.TryParse(typeof(Category), Console.ReadLine(),out category);
-            byte selection = 0;
-            Console.WriteLine("1.Yes \n 2.No");
-            if (selection==1)
+            string answer;
+            Console.WriteLine("Please choose the category");
+            foreach (var item in System.Enum.GetValues(typeof(Category)))
+            {
+                Console.WriteLine($"{(int)item}.{item}");
+            }
+            bool resultCategory = System.Enum.TryParse(typeof(Category), Console.ReadLine(), out category);
+
+            Console.WriteLine("Please enter group Number");
+            group.No = Console.ReadLine();
+            Console.WriteLine("Is this group oline?");
+            answer = Console.ReadLine();
+            if (answer.ToLower().Trim() == "yes") 
             {
                 group.IsOnline = true;
             }
-            if (selection==2)
+            else
             {
                 group.IsOnline = false;
             }
-            else
+
+            if (resultCategory)
             {
-                Console.WriteLine("Please select one of the variants");
+                
             }
-
-
-
+            courseServices.CreateNewGroup(group.No,(Category)category);
         }
         //public static void CreateNewGroupMenu()
         //{
@@ -52,6 +58,7 @@ namespace Console_Application.Services
             string groupNumber = Console.ReadLine();
             Console.WriteLine("Please enter student Points");
             byte studentPoint = Convert.ToByte(Console.ReadLine());
+            
 
             courseServices.CreateStudent(name, surname,groupNumber,studentPoint);
         }
@@ -78,6 +85,7 @@ namespace Console_Application.Services
         {
             courseServices.ShowAllGroups();
         }
+        
         
 
     }

@@ -43,30 +43,47 @@ namespace Console_Application.Services
 
         public string CreateStudent(string name,string surname,string groupNumber,byte studentPoint)
         {
-            if (string.IsNullOrEmpty(name)||string.IsNullOrEmpty(surname))
-                //||groupNumber<=0||studentPoint<0)               
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(surname))
+           // ||groupNumber<=0||studentPoint<0)               
             {
                 Console.WriteLine("Please enter correct Information");
             }
-            Student student = new Student(name,surname,groupNumber,studentPoint);
-
-            foreach (Student existedStudent in Students)
+            else
             {
-                if (student.Id!=existedStudent.Id)
-                {                   
-                    Students.Add(student);
-                    Group group = new Group();
-                    group.Students.Add(student);
-                    return $"{student.FullName()} successfully added";
-                }
-                else
-                {
-                    return "This student already exist";
-                }
+                Student student = new Student(name,surname,groupNumber,studentPoint);
+
+                Students.Add(student);
+                Group group = new Group();
+                group.Students.Add(student);
+                return $"{student.FullName()} successfully added";
             }
             return "Student can't added to group";
-              
-            
+
+
+            //else
+            //{
+            //    Students.Add(student);
+            //}
+            //Student student = new Student(name,surname,groupNumber,studentPoint);
+
+            //foreach (Student existedStudent in Students)
+            //{
+            //    if (student.Name != existedStudent.Name)
+            //    {
+            //        //Students.Add(student);
+            //        Group group = new Group();
+            //        group.Students.Add(student);
+            //        return $"{student.FullName()} successfully added";
+            //    }
+            //    else
+            //    {
+            //        return "This student already exist";
+            //    }
+            //}
+            //return "Student can't added to group";
+
+
         }
 
         public void EditGroup(string oldNo,string newNo)
@@ -132,7 +149,7 @@ namespace Console_Application.Services
             {
                 foreach (Group group in Groups)
                 {
-                    Console.WriteLine(group);
+                    Console.WriteLine(Convert.ToString(group.No));
                 }
             }
             else

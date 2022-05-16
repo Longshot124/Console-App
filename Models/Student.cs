@@ -6,43 +6,48 @@ namespace Console_Application.Models
 {
     public class Student
     {
-        int _id;
-        string _fullName;
-        public byte GroupNumber;
-        public bool Type;
+        public  int Id;
+        //private uint _id;
+        public string Name;
+        public string Surname;
+        public string GroupNumber;
+        public byte StudentPoint;
+        public bool Guarantee;
+        public static uint count;
 
-        public Student(int id,string fullName,byte groupNumber,bool type)
+        public Student(string name, string surname, string groupNumber,byte studentPoint)
         {
-            _id = id;
-            FullName = fullName;
+            
+            Name = name;
+            Surname = surname;
             GroupNumber = groupNumber;
-            Type = type;
+            StudentPoint = studentPoint;
+            
+            
+        }
+        public Student()
+        {
+
         }
 
-        public int Id 
-        { get 
-            {
-                return _id;
-            } 
-           
+        //public uint Id
+        //{
+        //    get
+        //    {
+        //        return _id;
+        //    }
+        //    //set
+        //    //{
+        //    //    Id = value;
+        //    //}
+
+        //}
+
+        public string FullName()
+        {
+           return $"Name : {Name} \n Surname : {Surname} \n GroupNumber : {GroupNumber} \n Id : {Id}";
         }
 
-        public string FullName 
-        {   get 
-            {
-                return _fullName;
-            } 
-            set 
-            {
-                if (value.Contains(' '))
-                {
-                    FullName = value;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct Name and Surname");
-                }
-            }
-        }
+
     }
 }

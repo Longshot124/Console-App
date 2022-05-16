@@ -12,27 +12,33 @@ namespace Console_Application.Models
         public Category Category;
         public bool IsOnline;
         byte _limit;
-        List<Student> students = new List<Student>();
+        public List<Student> Students;
         public static int count = 100;
-        //List<Group> groups = new List<Group>();
+        
 
         public Group(string no,Category category)
         {
+            No = no;
+            IsOnline = false;
             switch (category)
             {
                 case Category.Programming:
-                    No = $"P" + count;
+                    No = $"P" + No;
                     break;
                 case Category.Design:
-                    No = $"D" + count;
+                    No = $"D" + No;
                     break;
                 case Category.SytemAdministration:
-                    No = $"SA" + count;
+                    No = $"SA" + No;
                     break;
                 default:
                     break;
             }
             Category = category;
+        }
+        public Group()
+        {
+            Students = new List<Student>();
         }
 
         public byte Limit { 
@@ -55,10 +61,7 @@ namespace Console_Application.Models
                
             } 
         }
-        //public void AddStudent(Student student) 
-        //{
-        //    students.Add(student);
-        //}
+        
 
 
     }
